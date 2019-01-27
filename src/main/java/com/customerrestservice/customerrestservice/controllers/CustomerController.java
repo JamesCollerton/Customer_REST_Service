@@ -2,8 +2,10 @@ package com.customerrestservice.customerrestservice.controllers;
 
 import com.customerrestservice.customerrestservice.domain.Customer;
 import com.customerrestservice.customerrestservice.services.CustomerService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +37,12 @@ public class CustomerController implements IController<Customer> {
      * @return A response entity with the appropriate HTTP Status code and object
      */
     @Override
-    @GetMapping(value = "/{id}")
+    @ApiOperation(
+            httpMethod = "GET",
+            value = "Get customer by Id",
+            response = ResponseEntity.class
+    )
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> get(@PathVariable String id) {
         Optional<Customer> customer = customerService.findById(id);
         return customer
@@ -50,7 +57,12 @@ public class CustomerController implements IController<Customer> {
      * @return A response entity with the appropriate HTTP Status code and object
      */
     @Override
-    @PostMapping
+    @ApiOperation(
+            httpMethod = "POST",
+            value = "Insert new customer",
+            response = ResponseEntity.class
+    )
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> post(@RequestBody Customer customer) {
         customerService.save(customer);
         return new ResponseEntity<>(customer, HttpStatus.CREATED);
@@ -64,6 +76,11 @@ public class CustomerController implements IController<Customer> {
      * @return A response entity with the appropriate HTTP Status code
      */
     @Override
+    @ApiOperation(
+            httpMethod = "PUT",
+            value = "Update customer by Id",
+            response = ResponseEntity.class
+    )
     @PutMapping(value = "/{id}")
     public ResponseEntity put(@PathVariable String id, @RequestBody Customer customer) {
         customerService.updateById(id, customer);
@@ -77,6 +94,11 @@ public class CustomerController implements IController<Customer> {
      * @return A response entity with the appropriate HTTP Status code
      */
     @Override
+    @ApiOperation(
+            httpMethod = "DELETE",
+            value = "Delete customer by Id",
+            response = ResponseEntity.class
+    )
     @DeleteMapping(value = "/{id}")
     public ResponseEntity delete(@PathVariable String id) {
         customerService.deleteById(id);

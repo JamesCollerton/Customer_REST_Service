@@ -16,6 +16,9 @@ import java.util.Optional;
 @Service
 public class CustomerService {
 
+    /**
+     * Autowired customer repository for interacting with database layer
+     */
     @Autowired
     private CustomerRepository customerRepository;
 

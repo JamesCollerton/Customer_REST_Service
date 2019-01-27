@@ -54,7 +54,7 @@ POST customers
 
 ### Swagger
 
-Swagger has also been used to generate some documentation for the API. The documentation can be found at [here]().
+Swagger has also been used to generate some documentation for the API. The documentation can be found at [here](http://localhost:8080/swagger-ui.html).
 
 ## Database
 
