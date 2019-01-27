@@ -63,8 +63,9 @@ public class CustomerController implements IController<Customer> {
      * @return A response entity with the appropriate HTTP Status code
      */
     @Override
-    @PutMapping
-    public ResponseEntity put(String id, Customer customer) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity put(@PathVariable String id, @RequestBody Customer customer) {
+        customerService.updateById(id, customer);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
