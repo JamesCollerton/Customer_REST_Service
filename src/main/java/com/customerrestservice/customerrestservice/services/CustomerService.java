@@ -39,6 +39,11 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
+    public void deleteById(String stringId) {
+        Long longId = Long.parseLong(stringId);
+        customerRepository.deleteById(longId);
+    }
+
     /*
         TODO Move out of class
      */

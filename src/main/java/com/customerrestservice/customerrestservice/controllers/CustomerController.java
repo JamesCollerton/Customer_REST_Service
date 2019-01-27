@@ -77,8 +77,9 @@ public class CustomerController implements IController<Customer> {
      * @return A response entity with the appropriate HTTP Status code
      */
     @Override
-    @DeleteMapping
-    public ResponseEntity delete(String id) {
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity delete(@PathVariable String id) {
+        customerService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
