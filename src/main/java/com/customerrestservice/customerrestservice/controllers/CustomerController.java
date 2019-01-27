@@ -11,18 +11,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 /**
  * Controller for interaction with customers
  *
- * TODO Logging
- * TODO Swagger
- * TODO Exception handler
  * TODO Testing
  */
 @Controller
 @RequestMapping("/customers")
 public class CustomerController implements IController<Customer> {
+
+    /**
+     * Initialisation of logging
+     */
+    Logger logger = Logger.getLogger(CustomerController.class.getName());
 
     /**
      * Autowired service for business logic and abstraction of repository layer from controller
@@ -103,6 +106,16 @@ public class CustomerController implements IController<Customer> {
     public ResponseEntity delete(@PathVariable String id) {
         customerService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     * Generic exception handler for all exceptions
+     *
+     * @return Response entity containing failed status code
+     */
+    @ExceptionHandler({ Exception.class })
+    public ResponseEntity handleException() {
+        return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
