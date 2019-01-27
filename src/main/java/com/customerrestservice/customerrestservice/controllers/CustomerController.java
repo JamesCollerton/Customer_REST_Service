@@ -52,6 +52,7 @@ public class CustomerController implements IController<Customer> {
     @Override
     @PostMapping
     public ResponseEntity<Customer> post(@RequestBody Customer customer) {
+        customerService.save(customer);
         return new ResponseEntity<>(customer, HttpStatus.CREATED);
     }
 

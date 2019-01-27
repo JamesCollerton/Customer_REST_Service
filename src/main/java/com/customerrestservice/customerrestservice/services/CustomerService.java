@@ -19,19 +19,29 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    /**
-     * TODO Extract out parsing and handling exception
+    /*
+        TODO Extract out parsing and handling exception
      */
     public Optional<Customer> findById(String stringId) {
         Long longId = Long.parseLong(stringId);
         return customerRepository.findById(longId);
     }
 
+    /*
+        TODO Way of failing
+     */
     public void updateById(String stringId, Customer customerToUpdateTo) {
         Optional<Customer> customerToUpdateFrom = findById(stringId);
         customerToUpdateFrom.map(c -> copyCustomer(c, customerToUpdateTo)).map(customerRepository::save);
     }
 
+    public void save(Customer customer) {
+        customerRepository.save(customer);
+    }
+
+    /*
+        TODO Move out of class
+     */
     private Customer copyCustomer(Customer from, Customer to) {
         from.setName(to.getName());
         from.setAge(to.getAge());
