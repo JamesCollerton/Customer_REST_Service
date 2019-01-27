@@ -16,6 +16,16 @@ The end points of the application are as follows. All of these were derived usin
 
 ### End points
 
+These all map to a customer `json` object:
+
+```
+{
+	id: Long,
+	name: String,
+	age: int
+}
+```
+
 #### Get customer
 
 ```
