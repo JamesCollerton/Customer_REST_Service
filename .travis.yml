@@ -4,5 +4,7 @@ sudo: true
 before_install:
   - chmod +x mvnw
 script:
-  - ./mvnw clean install
-  - bash <(curl -s https://codecov.io/bash)
+  - mvn -N io.takari:maven:wrapper
+  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  #- ./mvnw clean install
+  #- bash <(curl -s https://codecov.io/bash)
